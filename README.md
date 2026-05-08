@@ -36,7 +36,7 @@ The project is built upon the **UC Berkeley Pacman AI Framework**, adapted to me
 We implemented and compared three fundamental search strategies in `search.py`:
 * **Breadth-First Search (BFS):** Guarantees the shortest path in unweighted graphs.
 * **Depth-First Search (DFS):** Explores deep into the maze before backtracking.
-* **A* Search:** Uses the **Manhattan Distance** heuristic to guide the search efficiently toward the goal.
+* **A*** Search:** Uses the **Manhattan Distance** heuristic to guide the search efficiently toward the goal.
 
 ### 3. Neural Network Integration (Risk Prediction)
 Located in `risk_prediction.py`, we integrated a **Multi-Layer Perceptron (MLP)** model:
