@@ -8,6 +8,9 @@
 * **Course:** CET251 - Artificial Intelligence
 * **Project ID:** Project 8 - Maze Solver Challenge
 * **Level:** Second-Year, Data Science & AI Technology
+* **Team Members:** Omar Ahmed Ramadan & Ahmed Mohamed Aldmrdash & Moaaz ABD Aljawwad Fouad
+
+
 
 ---
 
