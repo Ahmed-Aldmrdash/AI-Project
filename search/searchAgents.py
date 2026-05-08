@@ -43,6 +43,12 @@ import time
 import search
 import pacman
 
+# --- Neural Network Imports Added Here ---
+from keyboardAgents import KeyboardAgent
+import numpy as np
+from sklearn.neural_network import MLPClassifier
+# -----------------------------------------
+
 class GoWestAgent(Agent):
     "An agent that goes West until it can't."
 
@@ -541,3 +547,68 @@ def mazeDistance(point1: Tuple[int, int], point2: Tuple[int, int], gameState: pa
     assert not walls[x2][y2], 'point2 is a wall: ' + str(point2)
     prob = PositionSearchProblem(gameState, start=point1, goal=point2, warn=False, visualize=False)
     return len(search.bfs(prob))
+
+
+#######################################################
+# --- Neural Network Radar Agent Added Down Here ---  #
+#######################################################
+
+class NnRadarAgent(KeyboardAgent):
+    """
+    An agent that allows you to play using the keyboard,
+    while a Neural Network acts as a real-time risk radar.
+    """
+    def __init__(self, index=0):
+        super().__init__(index)
+        print("\n--- Training Neural Network Radar ---")
+        
+        np.random.seed(42)
+        num_samples = 1000
+        ghost_dist = np.random.randint(1, 11, num_samples)
+        goal_dist = np.random.randint(1, 21, num_samples)
+        walls_around = np.random.randint(0, 4, num_samples)
+        X = np.column_stack((ghost_dist, goal_dist, walls_around))
+        y = np.where((ghost_dist <= 2) | ((ghost_dist == 3) & (walls_around >= 2)), 1, 0)
+        
+        self.model = MLPClassifier(hidden_layer_sizes=(8, 4), activation='relu', max_iter=1000, random_state=42)
+        self.model.fit(X, y)
+        print("Radar Ready! 🚀 Use arrow keys to play.\n")
+
+    def getAction(self, state):
+        # 1. Get pacman position
+        pacman_pos = state.getPacmanPosition()
+        
+        # 2. Get nearest ghost distance
+        ghost_positions = state.getGhostPositions()
+        if ghost_positions:
+            min_ghost_dist = min([abs(pacman_pos[0] - g[0]) + abs(pacman_pos[1] - g[1]) for g in ghost_positions])
+        else:
+            min_ghost_dist = 10 
+            
+        # 3. Get nearest food distance
+        food_list = state.getFood().asList()
+        if food_list:
+            min_food_dist = min([abs(pacman_pos[0] - f[0]) + abs(pacman_pos[1] - f[1]) for f in food_list])
+        else:
+            min_food_dist = 0
+            
+        # 4. Count surrounding walls
+        walls = state.getWalls()
+        x, y = pacman_pos
+        walls_around = 0
+        if walls[x+1][y]: walls_around += 1 
+        if walls[x-1][y]: walls_around += 1 
+        if walls[x][y+1]: walls_around += 1 
+        if walls[x][y-1]: walls_around += 1 
+
+        # 5. Predict using NN
+        features = np.array([[min_ghost_dist, min_food_dist, walls_around]])
+        prediction = self.model.predict(features)[0]
+
+        # 6. Print result
+        if prediction == 1:
+            print(f"⚠️ DANGER! Ghost near ({int(min_ghost_dist)} steps) - Walls around: {walls_around}")
+        else:
+            print(f"✅ Safe. Nearest Ghost: {int(min_ghost_dist)} steps")
+
+        return super().getAction(state)
