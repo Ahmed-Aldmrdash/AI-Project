@@ -13,7 +13,7 @@ ghost_dist = np.random.randint(1, 11, num_samples)
 goal_dist = np.random.randint(1, 21, num_samples)
 walls_around = np.random.randint(0, 4, num_samples)
 
-# put the properties in one matrix(X)
+
 X = np.column_stack((ghost_dist, goal_dist, walls_around))
 
 
@@ -33,7 +33,7 @@ y_pred = model.predict(X_test)
 accuracy = accuracy_score(y_test, y_pred)
 print(f"Model Accuracy: {accuracy * 100:.2f}%\n")
 
-# test the model on new cases
+
 print("--- Testing Agent Moves ---")
 test_cases = np.array([
     [1, 10, 2],  
