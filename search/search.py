@@ -71,12 +71,14 @@ def tinyMazeSearch(problem):
     w = Directions.WEST
     return  [s, s, w, s, w, w, s, w]
 
+
+
 def depthFirstSearch(problem):
     """
     Search the deepest nodes in the search tree first.
     """
     from util import Stack
-    fringe = Stack() # المخزن
+    fringe = Stack() 
     fringe.push((problem.getStartState(), []))
     visited = set()
 
@@ -93,7 +95,7 @@ def depthFirstSearch(problem):
 def breadthFirstSearch(problem):
     """Search the shallowest nodes in the search tree first."""
     from util import Queue
-    fringe = Queue() # المخزن
+    fringe = Queue()
     fringe.push((problem.getStartState(), []))
     visited = set()
 
@@ -139,9 +141,8 @@ def aStarSearch(problem, heuristic=nullHeuristic):
     from util import PriorityQueue
     fringe = PriorityQueue()
     start_node = problem.getStartState()
-    # نضع (العقدة، المسار، التكلفة الحالية) والأولوية هي (التكلفة + الهيورستيك)
     fringe.push((start_node, [], 0), 0 + heuristic(start_node, problem))
-    visited = {} # نستخدم dict لتخزين أقل تكلفة وصلنا بها للعقدة
+    visited = {} 
 
     while not fringe.isEmpty():
         node, path, cost = fringe.pop()

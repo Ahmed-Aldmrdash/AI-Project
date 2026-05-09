@@ -592,7 +592,7 @@ class NnRadarAgent(KeyboardAgent):
         else:
             min_food_dist = 0
             
-        # 4. Count surrounding walls
+    
         walls = state.getWalls()
         x, y = pacman_pos
         walls_around = 0
@@ -601,11 +601,11 @@ class NnRadarAgent(KeyboardAgent):
         if walls[x][y+1]: walls_around += 1 
         if walls[x][y-1]: walls_around += 1 
 
-        # 5. Predict using NN
+
         features = np.array([[min_ghost_dist, min_food_dist, walls_around]])
         prediction = self.model.predict(features)[0]
 
-        # 6. Print result
+     
         if prediction == 1:
             print(f"⚠️ DANGER! Ghost near ({int(min_ghost_dist)} steps) - Walls around: {walls_around}")
         else:

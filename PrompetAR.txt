@@ -1,0 +1,50 @@
+=========================================================
+1. الدخول لمجلد المشروع (أول خطوة دائماً)
+=========================================================
+cd search
+
+
+=========================================================
+2. الخريطة الصغيرة جداً (Tiny Maze)
+=========================================================
+# تجربة البحث بالعمق (DFS)
+python pacman.py -l tinyMaze -p SearchAgent -a fn=dfs
+
+# تجربة البحث بالعرض (BFS)
+python pacman.py -l tinyMaze -p SearchAgent -a fn=bfs
+
+# تجربة البحث الأذكى (A*)
+python pacman.py -l tinyMaze -p SearchAgent -a fn=astar,heuristic=manhattanHeuristic
+
+
+=========================================================
+3. الخريطة المتوسطة (Medium Maze) - الأفضل للشرح والمناقشة
+=========================================================
+# DFS (بيجيب مسار طويل وغير مثالي - Cost: 130)
+python pacman.py -l mediumMaze -p SearchAgent -a fn=dfs
+
+# BFS (بيجيب أقصر مسار بس بيستهلك موارد ويفحص مربعات كتير - Nodes: 269)
+python pacman.py -l mediumMaze -p SearchAgent -a fn=bfs
+
+# A* (بيجيب أقصر مسار وبأقل مجهود بفضل الهيورستيك - Nodes: 221)
+python pacman.py -l mediumMaze -p SearchAgent -a fn=astar,heuristic=manhattanHeuristic
+
+
+=========================================================
+4. الخريطة الكبيرة (Big Maze) - لإظهار الفروق الضخمة
+=========================================================
+# DFS
+python pacman.py -l bigMaze -p SearchAgent -a fn=dfs
+
+# BFS
+python pacman.py -l bigMaze -p SearchAgent -a fn=bfs
+
+# A*
+python pacman.py -l bigMaze -p SearchAgent -a fn=astar,heuristic=manhattanHeuristic
+
+
+=========================================================
+5. ميزة الذكاء الاصطناعي والشبكات العصبية (Neural Network Radar)
+=========================================================
+# تشغيل اللعبة مع الرادار (تحكم بالأسهم وراقب التحذيرات في التيرمنال)
+python pacman.py -l mediumClassic -p NnRadarAgent

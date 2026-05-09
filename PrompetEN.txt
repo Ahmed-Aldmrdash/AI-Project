@@ -1,0 +1,51 @@
+=========================================================
+1. Enter the Project Directory (Always the first step)
+=========================================================
+cd search
+
+
+=========================================================
+2. Tiny Maze
+=========================================================
+# Test Depth-First Search (DFS)
+python pacman.py -l tinyMaze -p SearchAgent -a fn=dfs
+
+# Test Breadth-First Search (BFS)
+python pacman.py -l tinyMaze -p SearchAgent -a fn=bfs
+
+# Test A* Search (Smart Search)
+python pacman.py -l tinyMaze -p SearchAgent -a fn=astar,heuristic=manhattanHeuristic
+
+
+=========================================================
+3. Medium Maze (Best for explanation and discussion)
+=========================================================
+# DFS (Finds a long, sub-optimal path - Cost: 130)
+python pacman.py -l mediumMaze -p SearchAgent -a fn=dfs
+
+# BFS (Finds the shortest path but expands many nodes - Nodes: 269)
+python pacman.py -l mediumMaze -p SearchAgent -a fn=bfs
+
+# A* (Finds the shortest path efficiently using heuristics - Nodes: 221)
+python pacman.py -l mediumMaze -p SearchAgent -a fn=astar,heuristic=manhattanHeuristic
+
+
+=========================================================
+4. Big Maze (To demonstrate massive differences)
+=========================================================
+# DFS
+python pacman.py -l bigMaze -p SearchAgent -a fn=dfs
+
+# BFS
+python pacman.py -l bigMaze -p SearchAgent -a fn=bfs
+
+# A*
+python pacman.py -l bigMaze -p SearchAgent -a fn=astar,heuristic=manhattanHeuristic
+
+
+=========================================================
+5. AI & Neural Network Feature (NN Radar Agent)
+=========================================================
+# Run the game with the Neural Network Radar 
+# (Play with arrow keys and watch for danger warnings in the terminal)
+python pacman.py -l mediumClassic -p NnRadarAgent
