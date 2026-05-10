@@ -69,7 +69,7 @@ def tinyMazeSearch(problem):
     from game import Directions
     s = Directions.SOUTH
     w = Directions.WEST
-    return  [s, s, w, s, w, w, s, w]
+    return  [s, s, w, s, w, w, s, w]    
 
 
 
@@ -130,33 +130,33 @@ def uniformCostSearch(problem):
     return []
 
 def nullHeuristic(state, problem=None):
-    """
-    A heuristic function estimates the cost from the current state to the nearest
-    goal in the provided SearchProblem.  This heuristic is trivial.
-    """
-    return 0
+        """
+        A heuristic function estimates the cost from the current state to the nearest
+        goal in the provided SearchProblem.  This heuristic is trivial.
+        """
+        return 0
 
 def aStarSearch(problem, heuristic=nullHeuristic):
-    """Search the node that has the lowest combined cost and heuristic first."""
-    from util import PriorityQueue
-    fringe = PriorityQueue()
-    start_node = problem.getStartState()
-    fringe.push((start_node, [], 0), 0 + heuristic(start_node, problem))
-    visited = {} 
+        """Search the node that has the lowest combined cost and heuristic first."""
+        from util import PriorityQueue
+        fringe = PriorityQueue()
+        start_node = problem.getStartState()
+        fringe.push((start_node, [], 0), 0 + heuristic(start_node, problem))
+        visited = {} 
 
-    while not fringe.isEmpty():
-        node, path, cost = fringe.pop()
-        
-        if problem.isGoalState(node):
-            return path
+        while not fringe.isEmpty():
+            node, path, cost = fringe.pop()
+            
+            if problem.isGoalState(node):
+                return path
 
-        if (node not in visited) or (cost < visited[node]):
-            visited[node] = cost
-            for child_node, action, child_cost in problem.getSuccessors(node):
-                new_cost = cost + child_cost
-                new_priority = new_cost + heuristic(child_node, problem)
-                fringe.push((child_node, path + [action], new_cost), new_priority)
-    return []
+            if (node not in visited) or (cost < visited[node]):
+                visited[node] = cost
+                for child_node, action, child_cost in problem.getSuccessors(node):
+                    new_cost = cost + child_cost
+                    new_priority = new_cost + heuristic(child_node, problem)
+                    fringe.push((child_node, path + [action], new_cost), new_priority)
+        return []
 
 
 # Abbreviations

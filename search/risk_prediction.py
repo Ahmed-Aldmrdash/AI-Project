@@ -35,7 +35,7 @@ print(f"Model Accuracy: {accuracy * 100:.2f}%\n")
 
 
 print("--- Testing Agent Moves ---")
-test_cases = np.array([
+test_cases = np.array([ 
     [1, 10, 2],  
     [8, 5, 0],  
     [3, 2, 3]    
@@ -46,3 +46,4 @@ predictions = model.predict(test_cases)
 for i, state in enumerate(test_cases):
     status = "Danger ⚠️" if predictions[i] == 1 else "Safe ✅"
     print(f"State {i+1} -> Ghost Dist: {state[0]}, Goal Dist: {state[1]}, Walls: {state[2]} ===> Prediction: {status}")
+
